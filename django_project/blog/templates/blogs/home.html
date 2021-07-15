@@ -1,0 +1,24 @@
+{% extends "blogs/Base.html" %}
+{% block content %}
+    {% for flight in flights %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ flight.source }}</a>
+                    <small class="text-muted">{{ flight.To }}</small>
+                    <button id="b" style="background-color: #89cff0; border-radius: 2em; font-size:16px ">Book</button>
+                </div>
+                <h2><a class="article-title" href="#">{{ flight.check_in_date }}</a></h2>
+                <p class="article-content">{{ flight.check_out_date }}
+                <p class="article-content">Number of tickets: {{ flight.no_of_tickets }}</p>
+                <section>
+                    <option>
+                        {{ flight.class_avaiable }}
+                    </option>
+
+                </section>
+                <p class="article-content">{{ flight.class_avaiable }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
