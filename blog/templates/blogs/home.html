@@ -1,0 +1,79 @@
+{% extends "blogs/Base.html" %}
+{% block content %}
+    <main role="main" class="container">
+
+    <h3>Filter air Flight</h3>
+    <form method="GET" action=".">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="local"
+                           placeholder="From..."/>
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="title_exact"
+                           placeholder="TO..."/>
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMin" > From date</label>
+            <input type="date" class="form-control"  style="width: 30em" id="publishDateMin" name="date_min">
+        </div>
+        <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMax">To date</label>
+            <input style="width: 30em"  type="date" class="form-control" id="publishDateMax" name="date_max">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="category">class</label>
+            <select id="category" class="form-control" name="category">
+                <option selected>1</option>
+                <option selected>2</option>
+                <option selected>3</option>
+                {#              {% for cat in categories %}#}
+                <option value="{{ cat }}">{{ cat }}</option>
+{#                {% endfor %}#}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</main>
+    {% for flight in flights %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ flight.source }}</a>
+                    <small class="text-muted">{{ flight.To }}</small>
+                    <button id="b" style="background-color: #89cff0; border-radius: 2em; font-size:16px ">Book</button>
+                </div>
+                <h2><a class="article-title" href="#">{{ flight.check_in_date }}</a></h2>
+                <p class="article-content">{{ flight.check_out_date }}
+                <p class="article-content">Number of tickets: {{ flight.no_of_tickets }}</p>
+                <section>
+                    <option>
+                        {{ flight.class_avaiable }}
+                    </option>
+
+                </section>
+                <p class="article-content">{{ flight.class_avaiable }}</p>
+                <p class="article-content">{{ flight.plane.number_of_sets }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
