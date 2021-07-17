@@ -1,21 +1,15 @@
 from django.shortcuts import render
 from .models import add_flight
+from .filters import add_flightFilter
 
 
 def home(request):
     flights = add_flight.objects.all()
-    title_contains = request.GET.get('local')
-    title_exact = request.GET.get('id_exact')
-    date_min = request.GET.get('date_min')
-    date_max = request.GET.get('date_max')
-    if title_contains != '' and title_contains is not None:
-        flights = flights.filter(title__icontains=title_contains)
-    if title_exact != '' and title_exact is not None:
-        flights = flights.filter(title__icontains=title_exact)
+    searchFilter = add_flightFilter(request.GET, queryset=flights)
     context = {
         'flights': flights,
+        'searchFilter': searchFilter,
     }
-
     return render(request, 'blogs/home.html', context)
 
 
